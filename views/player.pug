@@ -1,0 +1,58 @@
+doctype html
+html
+  head
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-88562228-1"></script>
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    <link href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet"/>
+    <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"> </script>
+    <link href="/fonts.css" rel="stylesheet"/>
+    <link href="https://unpkg.com/@silvermine/videojs-quality-selector/dist/css/quality-selector.css" rel="stylesheet">
+    <link href="/main.css" rel="stylesheet">
+  body(style="opacity: 0;")
+    .videoWrapper
+      video.video.video-js#my-video(controls playsinline preload="auto" width="640" height="264" poster="/images/plbg.jpg")
+    <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
+    script.
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-88562228-1');
+      var player = videojs('my-video');
+      var session={};
+      //updateSource(!{JSON.stringify(session)});
+
+      reloadSource(!{JSON.stringify(session.id)});//
+      function reloadSource(id){
+        console.log("reloadSource", id)
+        axios.get("/conf/sessionStatus/"+id)
+                .then(function(e){updateSource(e.data);setTimeout(function(){reloadSource(id)}, 5000)})
+                .catch(function(e){console.warn(e);setTimeout(function(){reloadSource(id)}, 5000)})
+
+      }
+
+      //player.src("https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/r/playlist.m3u8")
+      document.getElementById("my-video").style.opacity = 1;
+      document.querySelector('body').style.opacity = 1;
+      function updateSource(newSess){
+        if(newSess.status==session.status)
+          return;
+        session=newSess;
+        player.pl
+        if(session.status==1 )
+        {
+          player.src("https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/"+session.key+"/playlist.m3u8");
+            try{player.play()} catch (e) {console.warn(e)}
+        }
+        else {
+          player.src("https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/r/playlist.m3u8");
+          try {
+            player.play()
+          } catch (e) {
+            console.warn(e)
+          }
+        }
+      }
+

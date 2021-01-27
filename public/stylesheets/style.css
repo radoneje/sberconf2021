@@ -1,0 +1,28 @@
+.add{
+    cursor: pointer;
+    display: inline-block;
+    background: green;
+    color: white;
+    padding: 4px;
+}
+.dayWr{
+    display: flex;
+}
+.day{
+    margin: 4px;
+    cursor: pointer;
+}
+.sessionWr{
+    margin-bottom: 0.67em;
+}
+.session{
+    margin-bottom: .5em;
+}
+.sessionTitle{
+    display: inline-block;
+    margin: 0 .5em;
+}
+.sessionFile{
+    display: inline-block;
+    margin: 0 0.65em;
+}

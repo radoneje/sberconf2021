@@ -1,0 +1,28 @@
+extends layout
+block head
+  script(src="/javascripts/vue.js")
+  script(src="/javascripts/axios.js")
+  script(src="/javascripts/adminScript.js")
+block content
+  #app
+    .dayWr
+      .day(v-for="item in conferenceDays" v-on:click="activeDay=item")
+        .dayTitle {{item.key}}
+      .addWr
+        input.inpAdd(v-model="newDay")
+        .add(v-on:click="addDay") Add
+    .activeWr(v-if="activeDay")
+      h1 {{activeDay.key}}
+      .sessionWr
+        .session(v-for="item in sessions")
+          .sessionTitle {{item.key}}
+          select(v-on:change="sessionChange($event, item)")
+            option(value="0" :selected="item.status==0" ) Не начался
+            option(value="1" :selected="item.status==1") В процессе
+            option(value="2" :selected="item.status==2") Окончен
+          .sessionFile  {{item.filename}}
+          .add(v-on:click="uploadFile(item)") uploadFile
+          a.sessionLink(:href="'/conf/event/'+activeDay.key+'/'+item.key+'/live'" target="_blank") link
+      .addWr
+        input.inpAdd(v-model="newSession")
+        .add(v-on:click="addSession") AddSession
