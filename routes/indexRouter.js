@@ -45,6 +45,13 @@ router.post('/sessionChange', async (req, res, next)=> {
   await req.knex("t_confSession").update(req.body.item).where({id:id});
   res.json(await req.knex.select("*").from("t_confSession").where({id:req.body.item.dayid}));
 });
+
+router.delete('/session/:id', async (req, res, next)=> {
+
+  await req.knex("t_confSession").where({id:req.params.id}).delete();
+  res.json(req.params.id);
+});
+
 router.get('/sessionStatus/:id', async (req, res, next)=> {
   var ret=await req.knex.select("*").from("t_confSession").where({id:req.params.id})
   if(ret.length>0)

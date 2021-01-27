@@ -23,6 +23,8 @@ block content
           .sessionFile  {{item.filename}}
           .add(v-on:click="uploadFile(item)") uploadFile
           a.sessionLink(:href="'/conf/event/'+activeDay.key+'/'+item.key+'/live'" target="_blank") link
+          .copy(v-on:click="copyText('https://front.sber.link/conf/event/'+activeDay.key+'/'+item.key+'/live')") copy
+          .del(v-on:click="sessionDelete(item)") del
       .addWr
         input.inpAdd(v-model="newSession")
         .add(v-on:click="addSession") AddSession

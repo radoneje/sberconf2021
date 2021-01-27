@@ -23,6 +23,13 @@ window.onload=function () {
                 item.status=event.target.value;
                 await axios.post("/conf/sessionChange/", {item:item});
             },
+            sessionDelete:async function(item){
+                await axios.delete("/conf/session/"+ item.id);
+                this.sessions=this.sessions.filter(e=>e.id!=item.id);
+            },
+            copyText:async function(text){
+                console.log(text);
+            },
             uploadFile:async function(item){
 
             },
