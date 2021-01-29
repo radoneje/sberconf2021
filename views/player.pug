@@ -51,13 +51,23 @@ html
           if(isInteract)
             try{player.play()} catch (e) {console.warn(e)}
         }
-        else {
-          player.src("https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/r/playlist.m3u8");
+        else if(session.status==0) {
+          player.src("https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/start/playlist.m3u8");
+          if (isInteract)
           try {
             player.play()
           } catch (e) {
             console.warn(e)
           }
+        } else
+          {
+          player.src("https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/end/playlist.m3u8");
+          if (isInteract)
+            try {
+              player.play()
+            } catch (e) {
+              console.warn(e)
+            }
         }
       }
 
