@@ -17,14 +17,20 @@ html
     script.
       document.getElementById("my-video").style.opacity = 1;
       document.querySelector('body').style.opacity = 1;
-      alert(0)
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      gtag('config', 'UA-88562228-1');
-      var isInteract = false;
+      try {
+        function gtag() {
+          dataLayer.push(arguments);
+        }
 
+        gtag('js', new Date());
+        gtag('config', 'UA-88562228-1');
+      }
+      catch (e) {
+        alert(e)
+        console.warn(e);
+      }
+      var isInteract = false;
+      alert(0)
       //  ["click", "mousemove", "mouseover", "mousemove", "touchmove", "focus"].forEach(function(eventName) {window.addEventListener(eventName, function() {isInteract=true;})});
       alert(1);
       var player = videojs('my-video');
