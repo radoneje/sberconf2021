@@ -20,6 +20,10 @@ html
       }
       gtag('js', new Date());
       gtag('config', 'UA-88562228-1');
+      var isInteract = false;
+
+      ["click", "mousemove", "mouseover", "mousemove", "touchmove", "focus"].forEach(function() {window.addEventListener(eventName, function() {isInteract=true;})});
+
       var player = videojs('my-video');
       var session={};
       //updateSource(!{JSON.stringify(session)});
@@ -44,6 +48,7 @@ html
         if(session.status==1 )
         {
           player.src("https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/"+session.key+"/playlist.m3u8");
+          if(isInteract)
             try{player.play()} catch (e) {console.warn(e)}
         }
         else {
