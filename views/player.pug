@@ -27,16 +27,15 @@ html
       }
       catch (e) {
         alert(e)
-        console.warn(e);
       }
       var isInteract = false;
       //alert(0)
-      //  ["click", "mousemove", "mouseover", "mousemove", "touchmove", "focus"].forEach(function(eventName) {window.addEventListener(eventName, function() {isInteract=true;})});
-      alert(1);
+      ["click", "mousemove", "mouseover", "mousemove", "touchmove", "focus"].forEach(function(eventName) {window.addEventListener(eventName, function() {isInteract=true;})});
+
       var player = videojs('my-video');
       var session={};
       //updateSource(!{JSON.stringify(session)});
-      alert(2)
+
       reloadSource(!{JSON.stringify(session.id)});//
       function reloadSource(id){
         console.log("reloadSource", id)
