@@ -15,6 +15,8 @@ html
       video.video.video-js#my-video(controls playsinline preload="auto" width="640" height="264" poster="/conf/images/sberconfzagl.png")
     <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
     script.
+      document.getElementById("my-video").style.opacity = 1;
+      document.querySelector('body').style.opacity = 1;
       function gtag() {
         dataLayer.push(arguments);
       }
@@ -38,8 +40,7 @@ html
       }
 
       //player.src("https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/r/playlist.m3u8")
-      document.getElementById("my-video").style.opacity = 1;
-      document.querySelector('body').style.opacity = 1;
+
       function updateSource(newSess){
         if(newSess.status==session.status)
           return;
