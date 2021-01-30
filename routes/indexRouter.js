@@ -17,8 +17,8 @@ router.get('/event/:day/:session/:lang?', async (req, res, next)=> {
     return res.send("Session not found").status(404);
   }
   var lang="ru";
-  if(req.params.lang=="en")
-    lang="en";
+ // if(req.params.lang=="en")
+   // lang="en";
   res.render("player",{session:session[0], lang:lang});
 });
 
