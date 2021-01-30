@@ -29,6 +29,7 @@
 .sessionTitle{
     display: inline-block;
     margin: 0 .5em;
+    width: 150px;
 }
 .sessionFile{
     display: inline-block;
