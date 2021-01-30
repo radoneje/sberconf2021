@@ -1,0 +1,12 @@
+extends layout
+block head
+  script(src="/conf/javascripts/vue.js")
+block content
+  .loginWr(style="width:400px; margin: 100px auto;")
+    form(method="POST")
+      .inRow
+        input(name="login" placeholder="login" style="width: 100%;")
+      .inRow
+        input(name="password" type="password" placeholder="password" style="width: 100%;")
+      .inRow
+        input(type="submit" value="log in" style="width: 100%;")

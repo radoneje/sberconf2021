@@ -18,6 +18,11 @@ const apiRouter = require('./routes/apiRouter');
 
 let app = express();
 app.config=config;
+var session = require('express-session', {maxAge:60*60*1000})
+app.use(session({
+  secret: 'you secrefevefvt key',
+  saveUninitialized: true
+}));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
