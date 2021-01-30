@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   //res.render('index', { title: 'Express' });
   res.send("Not found").status(404)
 });
-router.get('/event/:day/:session/:isLive?', async (req, res, next)=> {
+router.get('/event/:day/:session/:lang?', async (req, res, next)=> {
   //res.render('index', { title: 'Express' });
   let day=await req.knex.select("*").from("t_confDays").where({key:req.params.day})
   if(day.length==0){
@@ -16,7 +16,10 @@ router.get('/event/:day/:session/:isLive?', async (req, res, next)=> {
   if(session.length==0){
     return res.send("Session not found").status(404);
   }
-  res.render("player",{session:session[0]});
+  var lang="ru";
+  if(req.params.lang=="en")
+    lang="en";
+  res.render("player",{session:session[0], lang:lang});
 });
 
 router.get('/admin', function(req, res, next) {

@@ -20,11 +20,16 @@ block content
             option(value="0" :selected="item.status==0" ) Не начался
             option(value="1" :selected="item.status==1") В процессе
             option(value="2" :selected="item.status==2") Окончен
+            option(value="3" :selected="item.status==3") Показ записи
           .sessionFile  {{item.filename}}
-          .add(v-on:click="uploadFile(item)") uploadFile
-          a.sessionLink(:href="'/conf/event/'+activeDay.key+'/'+item.key+'/live'" target="_blank") link
-          .copy(v-on:click="copyText('https://front.sber.link/conf/event/'+activeDay.key+'/'+item.key+'/live')") copy
+          //.add(v-on:click="uploadFile(item)") uploadFile
+          a.sessionLink(:href="'/conf/event/'+activeDay.key+'/'+item.key+'/ru'" target="_blank") link
+          .copy(v-on:click="copyText('https://front.sber.link/conf/event/'+activeDay.key+'/'+item.key+'/ru')") copy
           .del(v-on:click="sessionDelete(item)") del
+          input.inpIframe(placeholder='РУС stream' v-model="item.streamru" v-on:change="sessionRecChange(item)")
+          input.inpIframe(placeholder="EN stream" v-model="item.streamen" v-on:change="sessionRecChange(item)")
+          input.inpIframe(placeholder='РУС iframe' v-model="item.recru" v-on:change="sessionRecChange(item)")
+          input.inpIframe(placeholder="EN iframe" v-model="item.recen" v-on:change="sessionRecChange(item)")
       .addWr
         input.inpAdd(v-model="newSession")
         .add(v-on:click="addSession") AddSession

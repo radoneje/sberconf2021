@@ -11,7 +11,7 @@ html
     <link href="https://unpkg.com/@silvermine/videojs-quality-selector/dist/css/quality-selector.css" rel="stylesheet">
     <link href="/conf/main.css" rel="stylesheet">
   body(style="opacity: 0;")
-    .videoWrapper
+    .videoWrapper#videoWrapper
       video.video.video-js#my-video(controls playsinline preload="auto" width="640" height="264" poster="/conf/images/sberconfzagl.png")
     <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
     script.
@@ -33,6 +33,7 @@ html
       ["click", "mousemove", "mouseover", "mousemove", "touchmove", "focus"].forEach(function(eventName) {window.addEventListener(eventName, function() {isInteract=true;})});
 
       var player = videojs('my-video');
+      var lang=!{JSON.stringify(lang)};
       var session={};
       //updateSource(!{JSON.stringify(session)});
 
@@ -50,11 +51,21 @@ html
       function updateSource(newSess){
         if(newSess.status==session.status)
           return;
+        if(session.status==3){
+          var elem = document.getElementById("videoWrapper");
+          var iframe = elem.querySelector("iframe");
+          iframe.parentNode.removeChild(iframe);
+          document.getElementById("my-video").style.width = "100%";
+          document.getElementById("my-video").style.height = "100%";
+
+          if(isInteract)
+            try{player.play()} catch (e) {console.warn(e)}
+        }
         session=newSess;
         player.pl
         if(session.status==1 )
         {
-          player.src("https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/"+session.key+"/playlist.m3u8");
+          player.src("https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/"+session["stream"+lang]+"/playlist.m3u8");
           if(isInteract)
             try{player.play()} catch (e) {console.warn(e)}
         }
@@ -66,7 +77,7 @@ html
           } catch (e) {
             console.warn(e)
           }
-        } else
+        } else if(session.status==2)
           {
           player.src("https://hls-fabrikanews.cdnvideo.ru/fabrikanews2/end/playlist.m3u8");
           if (isInteract)
@@ -75,6 +86,13 @@ html
             } catch (e) {
               console.warn(e)
             }
+        }
+        else if(session.status==3){
+          player.pause();
+          document.getElementById("my-video").style.width=0;
+          document.getElementById("my-video").style.height=0;
+          var elem=document.getElementById("videoWrapper");
+          elem.innerHTML += session["rec"+lang];
         }
       }
 
